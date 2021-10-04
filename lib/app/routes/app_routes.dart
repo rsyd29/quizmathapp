@@ -5,8 +5,14 @@ abstract class Routes {
   Routes._();
 
   static const HOME = _Paths.HOME;
+  static const QUIZ = _Paths.QUIZ;
+  static const INFORMASI = _Paths.INFORMASI;
+  static const MATERI = _Paths.MATERI;
 }
 
 abstract class _Paths {
   static const HOME = '/home';
+  static const QUIZ = '/quiz';
+  static const INFORMASI = '/informasi';
+  static const MATERI = '/materi';
 }
