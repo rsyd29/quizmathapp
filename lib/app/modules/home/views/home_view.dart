@@ -24,10 +24,13 @@ class HomeView extends GetView<HomeController> {
         title: Text('QuizMathApp'),
         actions: [
           IconButton(
-              onPressed: () {
-                SystemNavigator.pop();
-              },
-              icon: Icon(Icons.logout))
+            onPressed: () {
+              Get.defaultDialog(
+                cancel: Text("tidak"),
+              );
+            },
+            icon: Icon(Icons.logout),
+          ),
         ],
       ),
       body: SafeArea(
@@ -86,7 +89,7 @@ class MenuCardApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      elevation: 7,
+      elevation: 10,
       borderRadius: BorderRadius.circular(10),
       color: color,
       child: InkWell(

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:quizmathapp/app/modules/quiz/controllers/quiz_controller.dart';
 import 'package:quizmathapp/app/routes/app_pages.dart';
 
-class ResultView extends GetView {
+class ResultView extends GetView<QuizController> {
   bool shouldPop = true;
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class ResultView extends GetView {
         ),
         body: Center(
           child: Text(
-            'ResultView is working',
+            'Score: ${(Get.arguments * 100 / controller.semuaPertanyaan.length).toStringAsFixed(2)}',
             style: TextStyle(fontSize: 20),
           ),
         ),
