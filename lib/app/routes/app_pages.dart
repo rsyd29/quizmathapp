@@ -1,3 +1,4 @@
+import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
 
 import 'package:quizmathapp/app/modules/home/bindings/home_binding.dart';
@@ -8,6 +9,7 @@ import 'package:quizmathapp/app/modules/materi/bindings/materi_binding.dart';
 import 'package:quizmathapp/app/modules/materi/views/materi_view.dart';
 import 'package:quizmathapp/app/modules/quiz/bindings/quiz_binding.dart';
 import 'package:quizmathapp/app/modules/quiz/views/quiz_view.dart';
+import 'package:quizmathapp/app/modules/quiz/views/result_view.dart';
 
 part 'app_routes.dart';
 
@@ -36,6 +38,11 @@ class AppPages {
       name: _Paths.MATERI,
       page: () => MateriView(),
       binding: MateriBinding(),
+    ),
+    GetPage(
+      name: _Paths.RESULT,
+      page: () => ResultView(),
+      binding: QuizBinding(),
     ),
   ];
 }

@@ -8,6 +8,7 @@ abstract class Routes {
   static const QUIZ = _Paths.QUIZ;
   static const INFORMASI = _Paths.INFORMASI;
   static const MATERI = _Paths.MATERI;
+  static const RESULT = _Paths.RESULT;
 }
 
 abstract class _Paths {
@@ -15,4 +16,5 @@ abstract class _Paths {
   static const QUIZ = '/quiz';
   static const INFORMASI = '/informasi';
   static const MATERI = '/materi';
+  static const RESULT = '/result';
 }

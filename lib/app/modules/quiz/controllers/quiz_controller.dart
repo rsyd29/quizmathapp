@@ -20,7 +20,7 @@ class QuizController extends GetxController {
 
   forwardAct() {
     if (isLastPage)
-      Get.offNamedUntil(Routes.HOME, (route) => false);
+      Get.offNamedUntil(Routes.RESULT, (route) => false);
     else
       pageControll.nextPage(duration: 300.milliseconds, curve: Curves.ease);
   }
