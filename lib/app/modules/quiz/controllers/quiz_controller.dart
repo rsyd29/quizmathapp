@@ -12,20 +12,21 @@ class QuizController extends GetxController {
   final isPressed = false.obs;
   final score = 0.obs;
   final selectedPagexNumber = 0.obs;
+  final semuaPertanyaan = 0.obs;
 
-  bool get isLastPage =>
-      selectedPagexNumber.value == semuaPertanyaan.length - 1;
+  bool get isLastPage => selectedPagexNumber.value == semuaPertanyaan.value - 1;
 
   var pageControll = PageController();
 
   forwardAct() {
     if (isLastPage)
-      Get.offNamed(Routes.RESULT, arguments: score.value);
+      Get.offNamed(Routes.RESULT,
+          arguments: [score.value, semuaPertanyaan.value]);
     else
       pageControll.nextPage(duration: 300.milliseconds, curve: Curves.ease);
   }
 
-  List<ModelPertanyaan> semuaPertanyaan = [
+  List<ModelPertanyaan> semuaPertanyaanList = [
     ModelPertanyaan(
       "1 + 1 Hasilnya berapa?", // pertanyaan String
       {

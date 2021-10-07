@@ -20,7 +20,7 @@ class ResultView extends GetView<QuizController> {
         ),
         body: Center(
           child: Text(
-            'Score: ${(Get.arguments * 100 / controller.semuaPertanyaan.length).toStringAsFixed(2)}',
+            'Score: ${(Get.arguments[0] * 100 / Get.arguments[1]).toStringAsFixed(2)}',
             style: TextStyle(fontSize: 20),
           ),
         ),
