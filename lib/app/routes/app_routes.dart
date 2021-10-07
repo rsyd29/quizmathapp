@@ -9,6 +9,7 @@ abstract class Routes {
   static const INFORMASI = _Paths.INFORMASI;
   static const MATERI = _Paths.MATERI;
   static const RESULT = _Paths.RESULT;
+  static const SPLASH = _Paths.SPLASH;
 }
 
 abstract class _Paths {
@@ -17,4 +18,5 @@ abstract class _Paths {
   static const INFORMASI = '/informasi';
   static const MATERI = '/materi';
   static const RESULT = '/result';
+  static const SPLASH = '/splash';
 }

@@ -26,7 +26,17 @@ class HomeView extends GetView<HomeController> {
           IconButton(
             onPressed: () {
               Get.defaultDialog(
-                cancel: Text("tidak"),
+                title: "Keluar Aplikasi",
+                middleText: "Apakah kamu yakin ingin keluar dari aplikasi?",
+                textCancel: "Batal",
+                textConfirm: "Ya",
+                confirmTextColor: Colors.white,
+                onCancel: () {
+                  Get.back();
+                },
+                onConfirm: () {
+                  SystemNavigator.pop();
+                },
               );
             },
             icon: Icon(Icons.logout),

@@ -1,4 +1,3 @@
-import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
 
 import 'package:quizmathapp/app/modules/home/bindings/home_binding.dart';
@@ -10,13 +9,15 @@ import 'package:quizmathapp/app/modules/materi/views/materi_view.dart';
 import 'package:quizmathapp/app/modules/quiz/bindings/quiz_binding.dart';
 import 'package:quizmathapp/app/modules/quiz/views/quiz_view.dart';
 import 'package:quizmathapp/app/modules/quiz/views/result_view.dart';
+import 'package:quizmathapp/app/modules/splash/bindings/splash_binding.dart';
+import 'package:quizmathapp/app/modules/splash/views/splash_view.dart';
 
 part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = Routes.SPLASH;
 
   static final routes = [
     GetPage(
@@ -43,6 +44,11 @@ class AppPages {
       name: _Paths.RESULT,
       page: () => ResultView(),
       binding: QuizBinding(),
+    ),
+    GetPage(
+      name: _Paths.SPLASH,
+      page: () => SplashView(),
+      binding: SplashBinding(),
     ),
   ];
 }
