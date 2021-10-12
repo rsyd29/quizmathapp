@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:quizmathapp/app/routes/app_pages.dart';
 import '../controllers/quiz_controller.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -21,24 +22,24 @@ class QuizView extends GetView<QuizController> {
 
     return Scaffold(
       backgroundColor: mainColor,
-      body: Padding(
-        padding: EdgeInsets.all(18.0),
-        child: StreamBuilder<QuerySnapshot>(
-            stream: FirebaseFirestore.instance.collection('quiz').snapshots(),
-            builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                return Text("Something Error");
-              }
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: Container(
-                      color: Colors.transparent,
-                      child: SpinKitCircle(color: Color(0xff00AFF0), size: 50)),
-                );
-              } else {
-                final dataPertanyaan = snapshot.data!.docs;
+      body: StreamBuilder<QuerySnapshot>(
+          stream: FirebaseFirestore.instance.collection('quiz').snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Text("Something Error");
+            }
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: Container(
+                    color: Colors.transparent,
+                    child: SpinKitCircle(color: Color(0xff00AFF0), size: 50)),
+              );
+            } else {
+              final dataPertanyaan = snapshot.data!.docs;
 
-                return PageView.builder(
+              return Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: PageView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   controller: controller.pageControll,
                   onPageChanged: controller.selectedPagexNumber,
@@ -98,49 +99,51 @@ class QuizView extends GetView<QuizController> {
                         for (int i = 0;
                             i < dataPertanyaan[index]['jawaban'].length;
                             i++)
-                          Obx(() => Container(
-                                width: widthApp,
-                                margin: EdgeInsets.only(bottom: 18.0),
-                                child: MaterialButton(
-                                  shape: StadiumBorder(),
-                                  color: controller.isPressed.value
-                                      ? dataPertanyaan[index]['jawaban']
-                                              .values
-                                              .toList()[i]
-                                          ? controller.isTrue
-                                          : controller.isWrong
-                                      : secondColor,
-                                  padding: EdgeInsets.symmetric(vertical: 18.0),
-                                  onPressed: controller.isPressed.value
-                                      ? () {
-                                          print(dataPertanyaan[index]['jawaban']
-                                              .values
-                                              .toList()[i]);
+                          Obx(
+                            () => Container(
+                              width: widthApp,
+                              margin: EdgeInsets.only(bottom: 18.0),
+                              child: MaterialButton(
+                                shape: StadiumBorder(),
+                                color: controller.isPressed.value
+                                    ? dataPertanyaan[index]['jawaban']
+                                            .values
+                                            .toList()[i]
+                                        ? controller.isTrue
+                                        : controller.isWrong
+                                    : secondColor,
+                                padding: EdgeInsets.symmetric(vertical: 18.0),
+                                onPressed: controller.isPressed.value
+                                    ? () {
+                                        print(dataPertanyaan[index]['jawaban']
+                                            .values
+                                            .toList()[i]);
+                                      }
+                                    : () {
+                                        controller.semuaPertanyaan.value =
+                                            dataPertanyaan.length;
+                                        controller.isPressed.value = true;
+                                        if (dataPertanyaan[index]['jawaban']
+                                            .values
+                                            .toList()[i]) {
+                                          controller.score.value += 1;
+                                          print(controller.score);
                                         }
-                                      : () {
-                                          controller.semuaPertanyaan.value =
-                                              dataPertanyaan.length;
-                                          controller.isPressed.value = true;
-                                          if (dataPertanyaan[index]['jawaban']
-                                              .values
-                                              .toList()[i]) {
-                                            controller.score.value += 1;
-                                            print(controller.score);
-                                          }
-                                          print(dataPertanyaan[index]['jawaban']
-                                              .values
-                                              .toList()[i]);
-                                        },
-                                  child: Text(
-                                    dataPertanyaan[index]['jawaban']
-                                        .keys
-                                        .toList()[i],
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
+                                        print(dataPertanyaan[index]['jawaban']
+                                            .values
+                                            .toList()[i]);
+                                      },
+                                child: Text(
+                                  dataPertanyaan[index]['jawaban']
+                                      .keys
+                                      .toList()[i],
+                                  style: TextStyle(
+                                    color: Colors.white,
                                   ),
                                 ),
-                              )),
+                              ),
+                            ),
+                          ),
                         SizedBox(height: 8),
                         // Obx(() => (controller.isPressed.value == true)
                         //     ? Row(
@@ -158,7 +161,7 @@ class QuizView extends GetView<QuizController> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 OutlinedButton(
-                                  onPressed: () => Get.back(),
+                                  onPressed: () => Get.offNamed(Routes.HOME),
                                   child: Text(
                                     "Keluar dari Quiz",
                                     style: TextStyle(
@@ -196,10 +199,10 @@ class QuizView extends GetView<QuizController> {
                       ],
                     );
                   },
-                );
-              }
-            }),
-      ),
+                ),
+              );
+            }
+          }),
     );
   }
 }

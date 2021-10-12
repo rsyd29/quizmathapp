@@ -10,6 +10,7 @@ abstract class Routes {
   static const MATERI = _Paths.MATERI;
   static const RESULT = _Paths.RESULT;
   static const SPLASH = _Paths.SPLASH;
+  static const QUIZINFO = _Paths.QUIZINFO;
 }
 
 abstract class _Paths {
@@ -19,4 +20,5 @@ abstract class _Paths {
   static const MATERI = '/materi';
   static const RESULT = '/result';
   static const SPLASH = '/splash';
+  static const QUIZINFO = '/quizinfo';
 }

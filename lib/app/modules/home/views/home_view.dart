@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:quizmathapp/app/routes/app_pages.dart';
 
 import '../controllers/home_controller.dart';
@@ -39,7 +40,7 @@ class HomeView extends GetView<HomeController> {
                 },
               );
             },
-            icon: Icon(Icons.logout),
+            icon: Icon(Icons.exit_to_app),
           ),
         ],
       ),
@@ -62,7 +63,7 @@ class HomeView extends GetView<HomeController> {
                   heightApp: heightApp,
                   text: "Quiz",
                   color: Colors.blue[100]!,
-                  onTap: () => Get.toNamed(Routes.QUIZ),
+                  onTap: () => Get.toNamed(Routes.QUIZINFO),
                 ),
                 MenuCardApp(
                   widthApp: widthApp,
@@ -110,7 +111,13 @@ class MenuCardApp extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(text),
+              Text(
+                text,
+                style: GoogleFonts.poppins().copyWith(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w300,
+                    color: Colors.black45),
+              ),
             ],
           ),
         ),

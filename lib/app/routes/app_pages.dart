@@ -9,6 +9,8 @@ import 'package:quizmathapp/app/modules/materi/views/materi_view.dart';
 import 'package:quizmathapp/app/modules/quiz/bindings/quiz_binding.dart';
 import 'package:quizmathapp/app/modules/quiz/views/quiz_view.dart';
 import 'package:quizmathapp/app/modules/quiz/views/result_view.dart';
+import 'package:quizmathapp/app/modules/quizinfo/bindings/quizinfo_binding.dart';
+import 'package:quizmathapp/app/modules/quizinfo/views/quizinfo_view.dart';
 import 'package:quizmathapp/app/modules/splash/bindings/splash_binding.dart';
 import 'package:quizmathapp/app/modules/splash/views/splash_view.dart';
 
@@ -49,6 +51,11 @@ class AppPages {
       name: _Paths.SPLASH,
       page: () => SplashView(),
       binding: SplashBinding(),
+    ),
+    GetPage(
+      name: _Paths.QUIZINFO,
+      page: () => QuizinfoView(),
+      binding: QuizinfoBinding(),
     ),
   ];
 }
