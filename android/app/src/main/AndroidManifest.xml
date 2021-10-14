@@ -18,6 +18,7 @@
       </intent>
     </queries> 
    <application
+        android:usesCleartextTraffic="true"
         android:label="quizmathapp"
         android:icon="@mipmap/ic_launcher">
         <activity
