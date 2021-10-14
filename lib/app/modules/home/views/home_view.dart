@@ -23,6 +23,7 @@ class HomeView extends GetView<HomeController> {
       appBar: AppBar(
         leading: Icon(Icons.person),
         title: Text('QuizMathApp'),
+        centerTitle: true,
         actions: [
           IconButton(
             onPressed: () {

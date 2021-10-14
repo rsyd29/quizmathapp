@@ -11,18 +11,28 @@ class QuizController extends GetxController {
 
   final isPressed = false.obs;
   final score = 0.obs;
+  final hasilScoreAkhir = 0.0.obs;
   final selectedPagexNumber = 0.obs;
   final semuaPertanyaan = 0.obs;
+  final pernyataanScore = "".obs;
 
   bool get isLastPage => selectedPagexNumber.value == semuaPertanyaan.value - 1;
 
   var pageControll = PageController();
 
   forwardAct() {
-    if (isLastPage)
-      Get.offNamed(Routes.RESULT,
-          arguments: [score.value, semuaPertanyaan.value]);
-    else
+    if (isLastPage) {
+      hasilScoreAkhir.value = (score.value * 100) / semuaPertanyaan.value;
+      if (hasilScoreAkhir.value >= 60 && hasilScoreAkhir.value <= 100) {
+        pernyataanScore.value = "Wahh.. Kamu Hebat";
+      } else {
+        pernyataanScore.value = "Kamu belajar lagi ya..";
+      }
+      Get.offNamed(Routes.RESULT, arguments: [
+        hasilScoreAkhir.value,
+        pernyataanScore.value,
+      ]);
+    } else
       pageControll.nextPage(duration: 300.milliseconds, curve: Curves.ease);
   }
 
