@@ -34,27 +34,32 @@ class InformasiView extends GetView<InformasiController> {
                   key: key,
                   asset: "assets/gambar/instagram.png",
                   text: "Instagram",
-                  onTap: () =>
-                      controller.openUrl('https://www.instagram.com/rsyd29/'),
+                  onTap: () => controller.openUrl(
+                    'https://www.instagram.com/rsyd29/',
+                  ),
                 ),
                 SizedBox(
                   width: 10,
                 ),
                 SocialMedia(
-                    key: key,
-                    asset: "assets/gambar/whatsapp.png",
-                    text: "WhatsApp",
-                    onTap: () => controller.openUrl(
-                        'https://api.whatsapp.com/send?phone=6289636986438')),
+                  key: key,
+                  asset: "assets/gambar/whatsapp.png",
+                  text: "WhatsApp",
+                  onTap: () => controller.openUrl(
+                    'https://api.whatsapp.com/send?phone=6289636986438',
+                  ),
+                ),
                 SizedBox(
                   width: 10,
                 ),
                 SocialMedia(
-                    key: key,
-                    asset: "assets/gambar/facebook.png",
-                    text: "Facebook",
-                    onTap: () =>
-                        controller.openUrl('https://www.facebook.com')),
+                  key: key,
+                  asset: "assets/gambar/facebook.png",
+                  text: "Facebook",
+                  onTap: () => controller.openUrl(
+                    'https://www.facebook.com',
+                  ),
+                ),
               ],
             ),
           ],
@@ -72,7 +77,7 @@ class SocialMedia extends StatelessWidget {
     required this.onTap,
   }) : super(key: key);
   final String asset, text;
-  final GestureTapCallback? onTap;
+  final GestureTapCallback onTap;
 
   @override
   Widget build(BuildContext context) {
