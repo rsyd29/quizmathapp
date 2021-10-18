@@ -2,14 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:get/get.dart';
-import 'package:quizmathapp/app/model/model_pertanyaan.dart';
 import 'package:quizmathapp/app/routes/app_pages.dart';
 
 class QuizController extends GetxController {
   late TeXViewRenderingEngine renderingEngine;
 
-  Color isTrue = Colors.green;
-  Color isWrong = Colors.red;
+  Color isColorTrue = Colors.green;
+  Color isColorWrong = Colors.red;
   Color btnColor = Color(0xff117eeb);
 
   final isPressed = false.obs;
@@ -18,6 +17,10 @@ class QuizController extends GetxController {
   final selectedPagexNumber = 0.obs;
   final semuaPertanyaan = 0.obs;
   final pernyataanScore = "".obs;
+  final isWrong = false.obs;
+  final currentQuizIndex = 0.obs;
+
+  RxnString selectedOptionId = RxnString();
 
   bool get isLastPage => selectedPagexNumber.value == semuaPertanyaan.value - 1;
 

@@ -6,9 +6,9 @@ import 'package:quizmathapp/app/modules/quiz/controllers/quiz_controller.dart';
 import 'package:quizmathapp/app/routes/app_pages.dart';
 
 class ResultView extends GetView<QuizController> {
-  bool shouldPop = true;
   @override
   Widget build(BuildContext context) {
+    bool shouldPop = true;
     return WillPopScope(
       onWillPop: () async {
         Get.offNamedUntil(Routes.HOME, (route) => false);

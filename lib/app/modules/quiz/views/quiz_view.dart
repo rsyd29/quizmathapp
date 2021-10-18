@@ -5,6 +5,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:quizmathapp/app/model/model_quiz.dart';
+import 'package:quizmathapp/app/model/model_quizOption.dart';
 import 'package:quizmathapp/app/routes/app_pages.dart';
 import '../controllers/quiz_controller.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -45,8 +47,6 @@ class QuizView extends GetView<QuizController> {
                 onPageChanged: controller.selectedPagexNumber,
                 itemCount: dataPertanyaan.length,
                 itemBuilder: (context, index) {
-                  String dataPertanyaanTex = dataPertanyaan[index]['pertanyaan']
-                      .replaceAll(r' ', r'\ ');
                   return SingleChildScrollView(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -93,103 +93,128 @@ class QuizView extends GetView<QuizController> {
                             thickness: 1,
                           ),
                           SizedBox(height: 16.0),
-                          TeXView(
-                            renderingEngine: controller.renderingEngine,
-                            child: TeXViewColumn(
-                              children: [
-                                TeXViewDocument(
-                                  dataPertanyaan[index]['pertanyaan'],
+                          Column(
+                            children: [
+                              (dataPertanyaan[index]['gambar'] == "")
+                                  ? SizedBox()
+                                  : Image.network(
+                                      dataPertanyaan[index]['gambar'],
+                                      width: widthApp * 0.5,
+                                      height: heighApp * 0.25,
+                                    ),
+                              SizedBox(
+                                height: 16,
+                              ),
+                              TeXView(
+                                renderingEngine: controller.renderingEngine,
+                                child: TeXViewColumn(
+                                  children: [
+                                    TeXViewDocument(
+                                      dataPertanyaan[index]['pertanyaan'],
+                                    ),
+                                    // TeXViewGroup(
+                                    //   children: dataPertanyaan[index]
+                                    //           ['options']
+                                    //       .map((QuizOptionModel quizOptionM) {
+                                    //     return TeXViewGroupItem(
+                                    //       rippleEffect: false,
+                                    //       id: quizOptionM.id,
+                                    //       child: TeXViewDocument(
+                                    //         quizOptionM.option,
+                                    //         style: TeXViewStyle(
+                                    //           padding: TeXViewPadding.all(10),
+                                    //         ),
+                                    //       ),
+                                    //     );
+                                    //   }).toList(),
+                                    //   selectedItemStyle: TeXViewStyle(
+                                    //       borderRadius:
+                                    //           TeXViewBorderRadius.all(10),
+                                    //       border: TeXViewBorder.all(
+                                    //           TeXViewBorderDecoration(
+                                    //               borderWidth: 3,
+                                    //               borderColor:
+                                    //                   Colors.green[900])),
+                                    //       margin: TeXViewMargin.all(10)),
+                                    //   normalItemStyle: TeXViewStyle(
+                                    //       margin: TeXViewMargin.all(10)),
+                                    //   onTap: (id) {
+                                    //     controller.selectedOptionId.value =
+                                    //         id;
+                                    //     controller.isWrong.value = false;
+                                    //   },
+                                    // )
+                                  ],
                                 ),
-                              ],
-                            ),
-                            style: TeXViewStyle(
-                              backgroundColor: Color(0xff252c4a),
-                              contentColor: Colors.white,
-                              padding: TeXViewPadding.all(6),
-                            ),
+                                style: TeXViewStyle(
+                                  backgroundColor: Color(0xff252c4a),
+                                  contentColor: Colors.white,
+                                  padding: TeXViewPadding.all(6),
+                                ),
+                              ),
+                            ],
                           ),
-                          SizedBox(height: 16.0),
+                          SizedBox(height: 8.0),
                           for (int i = 0;
                               i < dataPertanyaan[index]['jawaban'].length;
                               i++)
                             Obx(
-                              () => InkWell(
-                                onTap: controller.isPressed.value
-                                    ? () {
-                                        print(dataPertanyaan[index]['jawaban']
-                                            .values
-                                            .toList()[i]);
-                                      }
-                                    : () {
-                                        controller.semuaPertanyaan.value =
-                                            dataPertanyaan.length;
-                                        controller.isPressed.value = true;
-                                        if (dataPertanyaan[index]['jawaban']
-                                            .values
-                                            .toList()[i]) {
-                                          controller.score.value += 1;
-                                          print(controller.score);
+                              () => Container(
+                                margin: EdgeInsets.only(bottom: 8.0),
+                                child: MaterialButton(
+                                  onPressed: controller.isPressed.value
+                                      ? () {
+                                          print(dataPertanyaan[index]['jawaban']
+                                              .values
+                                              .toList()[i]);
                                         }
-                                        print(dataPertanyaan[index]['jawaban']
-                                            .values
-                                            .toList()[i]);
-                                      },
-                                child: Container(
-                                  width: widthApp,
-                                  margin: EdgeInsets.only(bottom: 18.0),
-                                  child: MaterialButton(
-                                    onPressed: controller.isPressed.value
-                                        ? () {
-                                            print(dataPertanyaan[index]
-                                                    ['jawaban']
-                                                .values
-                                                .toList()[i]);
+                                      : () {
+                                          controller.semuaPertanyaan.value =
+                                              dataPertanyaan.length;
+                                          controller.isPressed.value = true;
+                                          if (dataPertanyaan[index]['jawaban']
+                                              .values
+                                              .toList()[i]) {
+                                            controller.score.value += 1;
+                                            print(controller.score);
                                           }
-                                        : () {
-                                            controller.semuaPertanyaan.value =
-                                                dataPertanyaan.length;
-                                            controller.isPressed.value = true;
-                                            if (dataPertanyaan[index]['jawaban']
-                                                .values
-                                                .toList()[i]) {
-                                              controller.score.value += 1;
-                                              print(controller.score);
-                                            }
-                                            print(dataPertanyaan[index]
-                                                    ['jawaban']
-                                                .values
-                                                .toList()[i]);
-                                          },
-                                    shape: StadiumBorder(),
-                                    color: controller.isPressed.value
-                                        ? dataPertanyaan[index]['jawaban']
-                                                .values
-                                                .toList()[i]
-                                            ? controller.isTrue
-                                            : controller.isWrong
-                                        : secondColor,
-                                    child: TeXView(
-                                      renderingEngine:
-                                          controller.renderingEngine,
-                                      child: TeXViewDocument(
-                                        dataPertanyaan[index]['jawaban']
-                                            .keys
-                                            .toList()[i],
-                                      ),
-                                      style: TeXViewStyle(
-                                        textAlign: TeXViewTextAlign.Center,
-                                        backgroundColor: controller
-                                                .isPressed.value
-                                            ? dataPertanyaan[index]['jawaban']
-                                                    .values
-                                                    .toList()[i]
-                                                ? controller.isTrue
-                                                : controller.isWrong
-                                            : secondColor,
-                                        contentColor: Colors.white,
-                                        fontStyle: TeXViewFontStyle(
-                                          fontSize: 12,
+                                          print(dataPertanyaan[index]['jawaban']
+                                              .values
+                                              .toList()[i]);
+                                        },
+                                  shape: StadiumBorder(),
+                                  color: controller.isPressed.value
+                                      ? dataPertanyaan[index]['jawaban']
+                                              .values
+                                              .toList()[i]
+                                          ? controller.isColorTrue
+                                          : controller.isColorWrong
+                                      : secondColor,
+                                  child: TeXView(
+                                    key: key,
+                                    renderingEngine: controller.renderingEngine,
+                                    child: TeXViewColumn(
+                                      children: [
+                                        TeXViewDocument(
+                                          dataPertanyaan[index]['jawaban']
+                                              .keys
+                                              .toList()[i],
                                         ),
+                                      ],
+                                    ),
+                                    style: TeXViewStyle(
+                                      textAlign: TeXViewTextAlign.Center,
+                                      backgroundColor:
+                                          controller.isPressed.value
+                                              ? dataPertanyaan[index]['jawaban']
+                                                      .values
+                                                      .toList()[i]
+                                                  ? controller.isColorTrue
+                                                  : controller.isColorWrong
+                                              : secondColor,
+                                      contentColor: Colors.white,
+                                      fontStyle: TeXViewFontStyle(
+                                        fontSize: 12,
                                       ),
                                     ),
                                   ),

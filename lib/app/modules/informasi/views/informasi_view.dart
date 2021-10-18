@@ -7,8 +7,6 @@ import '../controllers/informasi_controller.dart';
 class InformasiView extends GetView<InformasiController> {
   @override
   Widget build(BuildContext context) {
-    String dataFB = r"x=\frac{-4 \pm \sqrt{4^2 - 432}}{21} hasilnya berapa?";
-    String dataFBUbah = dataFB.replaceAll(r' ', r'\ ');
     return Scaffold(
       appBar: AppBar(
         title: Text('Informasi Aplikasi'),
