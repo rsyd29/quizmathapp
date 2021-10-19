@@ -5,8 +5,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:quizmathapp/app/model/model_quiz.dart';
-import 'package:quizmathapp/app/model/model_quizOption.dart';
 import 'package:quizmathapp/app/routes/app_pages.dart';
 import '../controllers/quiz_controller.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';

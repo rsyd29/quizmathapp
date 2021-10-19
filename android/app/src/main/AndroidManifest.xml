@@ -19,8 +19,8 @@
     </queries> 
    <application
         android:usesCleartextTraffic="true"
-        android:label="quizmathapp"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Quiz Math App"
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
