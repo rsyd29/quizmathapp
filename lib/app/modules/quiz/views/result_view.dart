@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quizmathapp/app/modules/quiz/controllers/quiz_controller.dart';
 import 'package:quizmathapp/app/routes/app_pages.dart';
+import 'package:lottie/lottie.dart';
 
 class ResultView extends GetView<QuizController> {
   @override
@@ -43,7 +44,10 @@ class ResultView extends GetView<QuizController> {
               ),
               Text(Get.arguments[1].toString(),
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-              Icon(Icons.home),
+              Container(
+                width: Get.width * 0.2,
+                child: Lottie.asset('assets/icon/clapping-hands.json'),
+              ),
               SizedBox(
                 height: 16,
               ),
