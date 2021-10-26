@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:quizmathapp/app/routes/app_pages.dart';
 import '../controllers/quiz_controller.dart';
@@ -103,53 +104,65 @@ class QuizView extends GetView<QuizController> {
                               SizedBox(
                                 height: 16,
                               ),
-                              TeXView(
-                                renderingEngine: controller.renderingEngine,
-                                child: TeXViewColumn(
-                                  children: [
-                                    TeXViewDocument(
+                              (dataPertanyaan[index]['pertanyaan']
+                                          .toString()
+                                          .substring(0, 1) ==
+                                      "<")
+                                  ? TeXView(
+                                      renderingEngine:
+                                          controller.renderingEngine,
+                                      child: TeXViewColumn(
+                                        children: [
+                                          TeXViewDocument(
+                                            dataPertanyaan[index]['pertanyaan'],
+                                          ),
+                                          // TeXViewGroup(
+                                          //   children: dataPertanyaan[index]
+                                          //           ['options']
+                                          //       .map((QuizOptionModel quizOptionM) {
+                                          //     return TeXViewGroupItem(
+                                          //       rippleEffect: false,
+                                          //       id: quizOptionM.id,
+                                          //       child: TeXViewDocument(
+                                          //         quizOptionM.option,
+                                          //         style: TeXViewStyle(
+                                          //           padding: TeXViewPadding.all(10),
+                                          //         ),
+                                          //       ),
+                                          //     );
+                                          //   }).toList(),
+                                          //   selectedItemStyle: TeXViewStyle(
+                                          //       borderRadius:
+                                          //           TeXViewBorderRadius.all(10),
+                                          //       border: TeXViewBorder.all(
+                                          //           TeXViewBorderDecoration(
+                                          //               borderWidth: 3,
+                                          //               borderColor:
+                                          //                   Colors.green[900])),
+                                          //       margin: TeXViewMargin.all(10)),
+                                          //   normalItemStyle: TeXViewStyle(
+                                          //       margin: TeXViewMargin.all(10)),
+                                          //   onTap: (id) {
+                                          //     controller.selectedOptionId.value =
+                                          //         id;
+                                          //     controller.isWrong.value = false;
+                                          //   },
+                                          // )
+                                        ],
+                                      ),
+                                      style: TeXViewStyle(
+                                        backgroundColor: Color(0xff252c4a),
+                                        contentColor: Colors.white,
+                                        padding: TeXViewPadding.all(6),
+                                      ),
+                                    )
+                                  : Text(
                                       dataPertanyaan[index]['pertanyaan'],
+                                      style: GoogleFonts.poppins().copyWith(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                      ),
                                     ),
-                                    // TeXViewGroup(
-                                    //   children: dataPertanyaan[index]
-                                    //           ['options']
-                                    //       .map((QuizOptionModel quizOptionM) {
-                                    //     return TeXViewGroupItem(
-                                    //       rippleEffect: false,
-                                    //       id: quizOptionM.id,
-                                    //       child: TeXViewDocument(
-                                    //         quizOptionM.option,
-                                    //         style: TeXViewStyle(
-                                    //           padding: TeXViewPadding.all(10),
-                                    //         ),
-                                    //       ),
-                                    //     );
-                                    //   }).toList(),
-                                    //   selectedItemStyle: TeXViewStyle(
-                                    //       borderRadius:
-                                    //           TeXViewBorderRadius.all(10),
-                                    //       border: TeXViewBorder.all(
-                                    //           TeXViewBorderDecoration(
-                                    //               borderWidth: 3,
-                                    //               borderColor:
-                                    //                   Colors.green[900])),
-                                    //       margin: TeXViewMargin.all(10)),
-                                    //   normalItemStyle: TeXViewStyle(
-                                    //       margin: TeXViewMargin.all(10)),
-                                    //   onTap: (id) {
-                                    //     controller.selectedOptionId.value =
-                                    //         id;
-                                    //     controller.isWrong.value = false;
-                                    //   },
-                                    // )
-                                  ],
-                                ),
-                                style: TeXViewStyle(
-                                  backgroundColor: Color(0xff252c4a),
-                                  contentColor: Colors.white,
-                                  padding: TeXViewPadding.all(6),
-                                ),
-                              ),
                             ],
                           ),
                           SizedBox(height: 8.0),
@@ -159,6 +172,7 @@ class QuizView extends GetView<QuizController> {
                             Obx(
                               () => Container(
                                 margin: EdgeInsets.only(bottom: 8.0),
+                                width: double.infinity,
                                 child: MaterialButton(
                                   onPressed: controller.isPressed.value
                                       ? () {
@@ -188,34 +202,57 @@ class QuizView extends GetView<QuizController> {
                                           ? controller.isColorTrue
                                           : controller.isColorWrong
                                       : secondColor,
-                                  child: TeXView(
-                                    key: key,
-                                    renderingEngine: controller.renderingEngine,
-                                    child: TeXViewColumn(
-                                      children: [
-                                        TeXViewDocument(
+                                  child: (dataPertanyaan[index]['jawaban']
+                                                  .keys
+                                                  .toList()[i]
+                                                  .toString()
+                                                  .substring(0, 1) ==
+                                              "<" ||
+                                          dataPertanyaan[index]['jawaban']
+                                                  .keys
+                                                  .toList()[i]
+                                                  .toString()
+                                                  .substring(0, 1) ==
+                                              "\\")
+                                      ? TeXView(
+                                          key: key,
+                                          renderingEngine:
+                                              controller.renderingEngine,
+                                          child: TeXViewColumn(
+                                            children: [
+                                              TeXViewDocument(
+                                                dataPertanyaan[index]['jawaban']
+                                                    .keys
+                                                    .toList()[i],
+                                              ),
+                                            ],
+                                          ),
+                                          style: TeXViewStyle(
+                                            textAlign: TeXViewTextAlign.Center,
+                                            backgroundColor: controller
+                                                    .isPressed.value
+                                                ? dataPertanyaan[index]
+                                                            ['jawaban']
+                                                        .values
+                                                        .toList()[i]
+                                                    ? controller.isColorTrue
+                                                    : controller.isColorWrong
+                                                : secondColor,
+                                            contentColor: Colors.white,
+                                            fontStyle: TeXViewFontStyle(
+                                              fontSize: 12,
+                                            ),
+                                          ),
+                                        )
+                                      : Text(
                                           dataPertanyaan[index]['jawaban']
                                               .keys
                                               .toList()[i],
+                                          style: GoogleFonts.poppins().copyWith(
+                                            color: Colors.white,
+                                            fontSize: 12,
+                                          ),
                                         ),
-                                      ],
-                                    ),
-                                    style: TeXViewStyle(
-                                      textAlign: TeXViewTextAlign.Center,
-                                      backgroundColor:
-                                          controller.isPressed.value
-                                              ? dataPertanyaan[index]['jawaban']
-                                                      .values
-                                                      .toList()[i]
-                                                  ? controller.isColorTrue
-                                                  : controller.isColorWrong
-                                              : secondColor,
-                                      contentColor: Colors.white,
-                                      fontStyle: TeXViewFontStyle(
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
                                 ),
                               ),
                             ),
