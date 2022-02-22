@@ -266,7 +266,10 @@ class QuizView extends GetView<QuizController> {
                                 ),
                               ),
                             controller.isPressed.value
-                                ? Image.network(dataPertanyaan[index]['uraian'])
+                                ? (dataPertanyaan[index]['uraian'] == '')
+                                    ? SizedBox()
+                                    : Image.network(
+                                        dataPertanyaan[index]['uraian'])
                                 : SizedBox(),
                             SizedBox(height: 8),
                             Obx(
