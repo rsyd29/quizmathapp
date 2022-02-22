@@ -47,10 +47,31 @@ class MateriView extends GetView<MateriController> {
                       String judulMateri = dataMateriIndex['judulMateri'];
                       String fileNamePDF =
                           judulMateri.replaceAll(' ', '_') + ".pdf";
-                      print(fileNamePDF);
-                      controller.openFile(
-                        url: dataMateriIndex['urlMateri'],
-                        fileName: fileNamePDF,
+                      String urlMateri = dataMateriIndex['urlMateri'];
+                      String urlYoutube = dataMateriIndex['urlYoutube'];
+                      Get.bottomSheet(
+                        Container(
+                          color: Colors.white,
+                          height: Get.height * 0.3,
+                          child: Column(
+                            children: [
+                              ListTile(
+                                title: Text('Materi'),
+                                onTap: () => controller.openFile(
+                                  url: urlMateri,
+                                  fileName: fileNamePDF,
+                                ),
+                              ),
+                              ListTile(
+                                title: Text('YouTube'),
+                                onTap: () => controller.openFile(
+                                  url: urlMateri,
+                                  fileName: fileNamePDF,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       );
                     },
                     leading: Icon(

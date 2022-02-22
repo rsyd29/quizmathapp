@@ -1,18 +1,20 @@
 import 'package:get/get.dart';
 
-import 'package:quizmathapp/app/modules/home/bindings/home_binding.dart';
-import 'package:quizmathapp/app/modules/home/views/home_view.dart';
-import 'package:quizmathapp/app/modules/informasi/bindings/informasi_binding.dart';
-import 'package:quizmathapp/app/modules/informasi/views/informasi_view.dart';
-import 'package:quizmathapp/app/modules/materi/bindings/materi_binding.dart';
-import 'package:quizmathapp/app/modules/materi/views/materi_view.dart';
-import 'package:quizmathapp/app/modules/quiz/bindings/quiz_binding.dart';
-import 'package:quizmathapp/app/modules/quiz/views/quiz_view.dart';
-import 'package:quizmathapp/app/modules/quiz/views/result_view.dart';
-import 'package:quizmathapp/app/modules/quizinfo/bindings/quizinfo_binding.dart';
-import 'package:quizmathapp/app/modules/quizinfo/views/quizinfo_view.dart';
-import 'package:quizmathapp/app/modules/splash/bindings/splash_binding.dart';
-import 'package:quizmathapp/app/modules/splash/views/splash_view.dart';
+import '../modules/home/bindings/home_binding.dart';
+import '../modules/home/views/home_view.dart';
+import '../modules/informasi/bindings/informasi_binding.dart';
+import '../modules/informasi/views/informasi_view.dart';
+import '../modules/materi/bindings/materi_binding.dart';
+import '../modules/materi/views/materi_view.dart';
+import '../modules/quiz/bindings/quiz_binding.dart';
+import '../modules/quiz/views/quiz_view.dart';
+import '../modules/quiz/views/result_view.dart';
+import '../modules/quizinfo/bindings/quizinfo_binding.dart';
+import '../modules/quizinfo/views/quizinfo_view.dart';
+import '../modules/splash/bindings/splash_binding.dart';
+import '../modules/splash/views/splash_view.dart';
+import '../modules/webview/bindings/webview_binding.dart';
+import '../modules/webview/views/webview_view.dart';
 
 part 'app_routes.dart';
 
@@ -56,6 +58,11 @@ class AppPages {
       name: _Paths.QUIZINFO,
       page: () => QuizinfoView(),
       binding: QuizinfoBinding(),
+    ),
+    GetPage(
+      name: _Paths.WEBVIEW,
+      page: () => WebviewView(),
+      binding: WebviewBinding(),
     ),
   ];
 }

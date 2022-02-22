@@ -11,6 +11,7 @@ abstract class Routes {
   static const RESULT = _Paths.RESULT;
   static const SPLASH = _Paths.SPLASH;
   static const QUIZINFO = _Paths.QUIZINFO;
+  static const WEBVIEW = _Paths.WEBVIEW;
 }
 
 abstract class _Paths {
@@ -21,4 +22,5 @@ abstract class _Paths {
   static const RESULT = '/result';
   static const SPLASH = '/splash';
   static const QUIZINFO = '/quizinfo';
+  static const WEBVIEW = '/webview';
 }
