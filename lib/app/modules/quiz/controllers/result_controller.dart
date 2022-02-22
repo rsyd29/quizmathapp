@@ -1,10 +1,13 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:get/get.dart';
 
 class ResultController extends GetxController {
-  final count = 0.obs;
+  late AudioPlayer audioPlayer;
   @override
   void onInit() {
     super.onInit();
+    print('jalankan audioPlayer');
+    audioPlayer = AudioPlayer();
   }
 
   @override
@@ -13,6 +16,12 @@ class ResultController extends GetxController {
   }
 
   @override
-  void onClose() {}
-  void increment() => count.value++;
+  void onClose() {
+    super.dispose();
+    audioPlayer.dispose();
+  }
+
+  void playSound(String url) async {
+    await audioPlayer.play(url);
+  }
 }
