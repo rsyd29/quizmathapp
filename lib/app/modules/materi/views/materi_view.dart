@@ -4,6 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import 'package:get/get.dart';
 
+import '../../webview/views/webview_view.dart';
 import '../controllers/materi_controller.dart';
 
 class MateriView extends GetView<MateriController> {
@@ -43,13 +44,14 @@ class MateriView extends GetView<MateriController> {
                       bottom: (index == dataMateri.length - 1) ? 8 : 0),
                   color: Colors.white,
                   child: ListTile(
-                    onTap: () {
+                    onTap: () async {
                       String judulMateri = dataMateriIndex['judulMateri'];
                       String fileNamePDF =
                           judulMateri.replaceAll(' ', '_') + ".pdf";
                       String urlMateri = dataMateriIndex['urlMateri'];
                       String urlYoutube = dataMateriIndex['urlYoutube'];
-                      Get.bottomSheet(
+                      Get.put(MateriController());
+                      await Get.bottomSheet(
                         Container(
                           color: Colors.white,
                           height: Get.height * 0.3,
@@ -64,9 +66,11 @@ class MateriView extends GetView<MateriController> {
                               ),
                               ListTile(
                                 title: Text('YouTube'),
-                                onTap: () => controller.openFile(
-                                  url: urlMateri,
-                                  fileName: fileNamePDF,
+                                onTap: () => Get.to(
+                                  () => WebviewView(
+                                    title: judulMateri,
+                                    initialUrl: urlYoutube,
+                                  ),
                                 ),
                               ),
                             ],

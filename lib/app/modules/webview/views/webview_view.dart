@@ -26,7 +26,7 @@ class WebviewView extends GetView<WebviewController> {
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w400,
-              color: Color(0xff656161),
+              color: Colors.black,
             ),
           ),
           elevation: 1,
@@ -37,7 +37,7 @@ class WebviewView extends GetView<WebviewController> {
           ),
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Icons.arrow_back_ios_new),
+            icon: Icon(Icons.arrow_back_ios_new, color: Colors.black),
           ),
           backgroundColor: Colors.white,
         ),

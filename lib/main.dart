@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import 'app/modules/splash/bindings/splash_binding.dart';
 import 'app/routes/app_pages.dart';
 
 Future<void> main() async {
@@ -15,6 +16,7 @@ Future<void> main() async {
       title: "Quiz Math App",
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
+      initialBinding: SplashBinding(),
       debugShowCheckedModeBanner: false,
       onInit: () => Timer(
         const Duration(
